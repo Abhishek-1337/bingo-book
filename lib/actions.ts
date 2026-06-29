@@ -2,18 +2,29 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import { checkAdminSession, setAdminSession, clearAdminSession, verifyPassword } from "@/lib/auth";
+import { checkRateLimit, resetRateLimit } from "@/lib/rate-limit";
 
 // ==================== AUTH ====================
 
 export async function loginAction(_prevState: unknown, formData: FormData) {
+  const headerStore = await headers();
+  const ip = headerStore.get("x-forwarded-for") ?? headerStore.get("x-real-ip") ?? "unknown";
+
+  const { allowed, retryAfter } = checkRateLimit(ip);
+  if (!allowed) {
+    return { error: `Too many attempts. Try again in ${retryAfter} seconds.` };
+  }
+
   const password = formData.get("password") as string;
 
   if (!verifyPassword(password)) {
     return { error: "Invalid password" };
   }
 
+  resetRateLimit(ip);
   await setAdminSession();
   redirect("/admin");
 }
