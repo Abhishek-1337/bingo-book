@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import { createProject, updateProject, deleteProject } from "@/lib/actions";
+import { ImageUpload } from "./ImageUpload";
 
 type Project = {
   id: string;
@@ -27,59 +28,70 @@ function FormButton() {
 export function ProjectManager({ projects }: { projects: Project[] }) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const editingProject = editingId ? projects.find((p) => p.id === editingId) : null;
+
+  function handleOpen(project?: Project) {
+    if (project) {
+      setEditingId(project.id);
+    } else {
+      setEditingId(null);
+    }
+    setShowForm(true);
+  }
+
+  function handleClose() {
+    setShowForm(false);
+    setEditingId(null);
+  }
 
   return (
     <div className="card p-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="section-title mb-0">Projects</h2>
-        <button
-          onClick={() => {
-            setShowForm(true);
-            setEditingId(null);
-          }}
-          className="btn-primary"
-        >
+        <button onClick={() => handleOpen()} className="btn-primary">
           Add Project
         </button>
       </div>
 
       {showForm && (
-        <div className="mb-6 rounded-lg border border-card-border p-4">
-          <h3 className="font-semibold mb-4">
-            {editingId ? "Edit Project" : "New Project"}
-          </h3>
-          <form
-            action={editingId ? (fd) => updateProject(editingId, fd) : createProject}
-            className="space-y-3"
-          >
-            <input name="title" placeholder="Project Title" required className="input" />
-            <textarea name="description" placeholder="Description" rows={3} className="input resize-none" />
-            <div className="grid gap-3 sm:grid-cols-2">
-              <input name="url" placeholder="Live Demo URL" className="input" />
-              <input name="githubUrl" placeholder="GitHub URL" className="input" />
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <input name="image" placeholder="Project Image URL" className="input" />
-              <input name="tags" placeholder="Tags (comma separated)" className="input" />
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <input name="order" type="number" placeholder="Order" defaultValue={0} className="input" />
-            </div>
-            <input type="hidden" name="id" />
-            <div className="flex gap-2">
-              <FormButton />
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="fixed inset-0 bg-black/50" onClick={handleClose} />
+          <div className="relative z-10 w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-xl bg-card p-6 shadow-xl border border-card-border">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-semibold text-lg">
+                {editingId ? "Edit Project" : "New Project"}
+              </h3>
               <button
-                type="button"
-                onClick={() => {
-                  setShowForm(false);
-                  setEditingId(null);
-                }}
-                className="btn-secondary"
+                onClick={handleClose}
+                className="flex h-8 w-8 items-center justify-center rounded-full text-text-secondary hover:bg-card-border hover:text-foreground"
               >
-                Cancel
+                ✕
               </button>
             </div>
-          </form>
+            <form
+              action={editingId ? (fd) => updateProject(editingId, fd) : createProject}
+              className="space-y-3"
+            >
+              <input name="title" placeholder="Project Title" required className="input" defaultValue={editingProject?.title ?? ""} />
+              <textarea name="description" placeholder="Description" rows={3} className="input resize-none" defaultValue={editingProject?.description ?? ""} />
+              <div className="grid gap-3 sm:grid-cols-2">
+                <input name="url" placeholder="Live Demo URL" className="input" defaultValue={editingProject?.url ?? ""} />
+                <input name="githubUrl" placeholder="GitHub URL" className="input" defaultValue={editingProject?.githubUrl ?? ""} />
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <ImageUpload name="image" label="Project Image" currentUrl={editingProject?.image} />
+                <input name="tags" placeholder="Tags (comma separated)" className="input" defaultValue={editingProject?.tags.join(", ") ?? ""} />
+              </div>
+              <input name="order" type="number" placeholder="Order" defaultValue={editingProject?.order ?? 0} className="input w-24" />
+              <input type="hidden" name="id" />
+              <div className="flex gap-2 pt-2">
+                <FormButton />
+                <button type="button" onClick={handleClose} className="btn-secondary">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
 
@@ -96,10 +108,7 @@ export function ProjectManager({ projects }: { projects: Project[] }) {
             </div>
             <div className="flex gap-2">
               <button
-                onClick={() => {
-                  setEditingId(project.id);
-                  setShowForm(true);
-                }}
+                onClick={() => handleOpen(project)}
                 className="btn-secondary text-sm"
               >
                 Edit

@@ -60,7 +60,7 @@ export function ProfileHeader({ profile }: { profile: Profile }) {
 
         <div className="flex flex-wrap gap-3 mt-3">
           {profile.email && (
-            <a href={`mailto:${profile.email}`} className="social-link">
+            <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`} target="_blank" rel="noopener noreferrer" className="social-link">
               Email
             </a>
           )}
@@ -84,6 +84,24 @@ export function ProfileHeader({ profile }: { profile: Profile }) {
               Twitter
             </a>
           )}
+        </div>
+
+        <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-card-border">
+          {[
+            { label: "About", href: "#about" },
+            { label: "Experience", href: "#experience" },
+            { label: "Projects", href: "#projects" },
+            { label: "Skills", href: "#skills" },
+            { label: "Contact", href: "#contact" },
+          ].map(({ label, href }) => (
+            <a
+              key={href}
+              href={href}
+              className="rounded-full px-3 py-1 text-xs font-medium text-text-secondary bg-background hover:text-accent hover:bg-accent/10 transition-colors"
+            >
+              {label}
+            </a>
+          ))}
         </div>
       </div>
     </div>

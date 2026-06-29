@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import { createExperience, updateExperience, deleteExperience } from "@/lib/actions";
+import { ImageUpload } from "./ImageUpload";
 
 type Experience = {
   id: string;
@@ -28,6 +29,7 @@ function FormButton() {
 export function ExperienceManager({ experiences }: { experiences: Experience[] }) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const editingExp = editingId ? experiences.find((e) => e.id === editingId) : null;
 
   return (
     <div className="card p-6">
@@ -54,28 +56,28 @@ export function ExperienceManager({ experiences }: { experiences: Experience[] }
             className="space-y-3"
           >
             <div className="grid gap-3 sm:grid-cols-2">
-              <input name="company" placeholder="Company" required className="input" />
-              <input name="role" placeholder="Role" required className="input" />
+              <input name="company" placeholder="Company" required className="input" defaultValue={editingExp?.company ?? ""} />
+              <input name="role" placeholder="Role" required className="input" defaultValue={editingExp?.role ?? ""} />
             </div>
-            <input name="logo" placeholder="Company Logo URL" className="input" />
-            <textarea name="description" placeholder="Description" rows={3} className="input resize-none" />
+            <ImageUpload name="logo" label="Company Logo" currentUrl={editingExp?.logo} />
+            <textarea name="description" placeholder="Description" rows={3} className="input resize-none" defaultValue={editingExp?.description ?? ""} />
             <div className="grid gap-3 sm:grid-cols-3">
               <div>
                 <label className="label">Start Date</label>
-                <input name="startDate" type="date" required className="input" />
+                <input name="startDate" type="date" required className="input" defaultValue={editingExp?.startDate ? new Date(editingExp.startDate).toISOString().split("T")[0] : ""} />
               </div>
               <div>
                 <label className="label">End Date</label>
-                <input name="endDate" type="date" className="input" />
+                <input name="endDate" type="date" className="input" defaultValue={editingExp?.endDate ? new Date(editingExp.endDate).toISOString().split("T")[0] : ""} />
               </div>
               <div className="flex items-end pb-1">
                 <label className="flex items-center gap-2 text-sm">
-                  <input type="checkbox" name="current" className="rounded" />
+                  <input type="checkbox" name="current" className="rounded" defaultChecked={editingExp?.current ?? false} />
                   Currently working here
                 </label>
               </div>
             </div>
-            <input name="order" type="number" placeholder="Order" defaultValue={0} className="input w-24" />
+            <input name="order" type="number" placeholder="Order" defaultValue={editingExp?.order ?? 0} className="input w-24" />
             <input type="hidden" name="id" />
             <div className="flex gap-2">
               <FormButton />

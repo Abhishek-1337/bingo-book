@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import { createEducation, updateEducation, deleteEducation } from "@/lib/actions";
+import { ImageUpload } from "./ImageUpload";
 
 type Education = {
   id: string;
@@ -27,6 +28,7 @@ function FormButton() {
 export function EducationManager({ educations }: { educations: Education[] }) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const editingEdu = editingId ? educations.find((e) => e.id === editingId) : null;
 
   return (
     <div className="card p-6">
@@ -53,25 +55,25 @@ export function EducationManager({ educations }: { educations: Education[] }) {
             className="space-y-3"
           >
             <div className="grid gap-3 sm:grid-cols-2">
-              <input name="school" placeholder="School" required className="input" />
-              <input name="degree" placeholder="Degree" required className="input" />
+              <input name="school" placeholder="School" required className="input" defaultValue={editingEdu?.school ?? ""} />
+              <input name="degree" placeholder="Degree" required className="input" defaultValue={editingEdu?.degree ?? ""} />
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
-              <input name="field" placeholder="Field of Study" className="input" />
-              <input name="logo" placeholder="School Logo URL" className="input" />
+              <input name="field" placeholder="Field of Study" className="input" defaultValue={editingEdu?.field ?? ""} />
+              <ImageUpload name="logo" label="School Logo" currentUrl={editingEdu?.logo} />
             </div>
             <div className="grid gap-3 sm:grid-cols-3">
               <div>
                 <label className="label">Start Date</label>
-                <input name="startDate" type="date" required className="input" />
+                <input name="startDate" type="date" required className="input" defaultValue={editingEdu?.startDate ? new Date(editingEdu.startDate).toISOString().split("T")[0] : ""} />
               </div>
               <div>
                 <label className="label">End Date</label>
-                <input name="endDate" type="date" className="input" />
+                <input name="endDate" type="date" className="input" defaultValue={editingEdu?.endDate ? new Date(editingEdu.endDate).toISOString().split("T")[0] : ""} />
               </div>
               <div>
                 <label className="label">Order</label>
-                <input name="order" type="number" defaultValue={0} className="input" />
+                <input name="order" type="number" defaultValue={editingEdu?.order ?? 0} className="input" />
               </div>
             </div>
             <input type="hidden" name="id" />

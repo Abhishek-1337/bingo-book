@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import { createCertification, updateCertification, deleteCertification } from "@/lib/actions";
+import { ImageUpload } from "./ImageUpload";
 
 type Certification = {
   id: string;
@@ -29,6 +30,7 @@ function formatDate(date: Date) {
 export function CertificationManager({ certifications }: { certifications: Certification[] }) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const editingCert = editingId ? certifications.find((c) => c.id === editingId) : null;
 
   return (
     <div className="card p-6">
@@ -55,16 +57,16 @@ export function CertificationManager({ certifications }: { certifications: Certi
             className="space-y-3"
           >
             <div className="grid gap-3 sm:grid-cols-2">
-              <input name="name" placeholder="Certification Name" required className="input" />
-              <input name="issuer" placeholder="Issuing Organization" required className="input" />
+              <input name="name" placeholder="Certification Name" required className="input" defaultValue={editingCert?.name ?? ""} />
+              <input name="issuer" placeholder="Issuing Organization" required className="input" defaultValue={editingCert?.issuer ?? ""} />
             </div>
             <div className="grid gap-3 sm:grid-cols-3">
               <div>
                 <label className="label">Date</label>
-                <input name="date" type="date" required className="input" />
+                <input name="date" type="date" required className="input" defaultValue={editingCert?.date ? new Date(editingCert.date).toISOString().split("T")[0] : ""} />
               </div>
-              <input name="url" placeholder="Credential URL" className="input" />
-              <input name="image" placeholder="Image URL" className="input" />
+              <input name="url" placeholder="Credential URL" className="input" defaultValue={editingCert?.url ?? ""} />
+              <ImageUpload name="image" label="Image" currentUrl={editingCert?.image} />
             </div>
             <input type="hidden" name="id" />
             <div className="flex gap-2">

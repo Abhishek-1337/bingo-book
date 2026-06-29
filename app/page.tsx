@@ -40,13 +40,13 @@ export default async function Home() {
     <main className="mx-auto max-w-[1128px] px-4 py-8">
       <div className="space-y-6">
         <ProfileHeader profile={profile} />
-        <About bio={profile.bio} />
-        <Experience items={experiences} />
+        <div id="about"><About bio={profile.bio} /></div>
+        <div id="experience"><Experience items={experiences} /></div>
         <Education items={education} />
-        <Projects items={projects} />
-        <Skills items={skills} />
+        <div id="projects"><Projects items={projects} /></div>
+        <div id="skills"><Skills items={skills} /></div>
         <Certifications items={certifications} />
-        <ContactForm />
+        <div id="contact"><ContactForm /></div>
       </div>
     </main>
   );
