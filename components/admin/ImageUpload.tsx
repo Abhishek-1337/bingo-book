@@ -55,7 +55,18 @@ export function ImageUpload({
     }
   }
 
-  function handleRemove() {
+  async function handleRemove() {
+    if (preview && preview.includes("blob.vercel-storage.com")) {
+      try {
+        await fetch("/api/delete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url: preview }),
+        });
+      } catch {
+        // silently fail
+      }
+    }
     setPreview(null);
     setError(null);
     if (hiddenInputRef.current) {
