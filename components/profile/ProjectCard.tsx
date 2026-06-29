@@ -20,10 +20,10 @@ export function ProjectCard({ project }: { project: Project }) {
     <>
       <div
         onClick={() => setOpen(true)}
-        className="group cursor-pointer rounded-lg border border-card-border p-4 shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
+        className="group cursor-pointer rounded-2xl border border-project-card-border p-6 shadow-md hover:shadow-xl transition-all bg-project-card text-project-card-text min-h-[200px]"
       >
         {project.image && (
-          <div className="relative mb-3 h-[160px] w-full rounded overflow-hidden bg-gray-100">
+          <div className="relative mb-4 h-[140px] w-full rounded-xl overflow-hidden">
             <Image
               src={project.image}
               alt={project.title}
@@ -33,20 +33,20 @@ export function ProjectCard({ project }: { project: Project }) {
             />
           </div>
         )}
-        <h3 className="font-semibold text-foreground">{project.title}</h3>
+        <h3 className="font-semibold text-lg">{project.title}</h3>
         {project.description && (
-          <p className="mt-1 text-sm text-text-secondary line-clamp-2">
+          <p className="mt-2 text-sm opacity-80 line-clamp-2">
             {project.description}
           </p>
         )}
-        <div className="mt-3 flex flex-wrap gap-1">
+        <div className="mt-4 flex flex-wrap gap-2">
           {project.tags.map((tag) => (
-            <span key={tag} className="tag">
+            <span key={tag} className="px-3 py-1 text-xs rounded-full bg-white/10 font-medium">
               {tag}
             </span>
           ))}
         </div>
-        <p className="mt-3 text-xs text-blue-300">Click to view details</p>
+        <p className="mt-4 text-xs opacity-50 group-hover:opacity-100 transition-opacity">Click to view details →</p>
       </div>
 
       {open && (
