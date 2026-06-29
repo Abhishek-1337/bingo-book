@@ -498,3 +498,71 @@ export async function deleteMessage(id: string) {
   await prisma.message.delete({ where: { id } });
   revalidatePath("/admin/messages");
 }
+
+// ==================== ACHIEVEMENTS ====================
+
+export async function getAchievements() {
+  return prisma.achievement.findMany({ orderBy: { order: "asc" } });
+}
+
+export async function createAchievement(formData: FormData) {
+  const session = await checkAdminSession();
+  if (!session) throw new Error("Unauthorized");
+
+  const title = formData.get("title") as string;
+  const description = formData.get("description") as string;
+  const date = formData.get("date") as string;
+  const icon = formData.get("icon") as string;
+  const url = formData.get("url") as string;
+  const order = parseInt(formData.get("order") as string || "0");
+
+  await prisma.achievement.create({
+    data: {
+      title,
+      description: description || null,
+      date: new Date(date),
+      icon: icon || null,
+      url: url || null,
+      order,
+    },
+  });
+
+  revalidatePath("/");
+  revalidatePath("/admin/achievements");
+}
+
+export async function updateAchievement(id: string, formData: FormData) {
+  const session = await checkAdminSession();
+  if (!session) throw new Error("Unauthorized");
+
+  const title = formData.get("title") as string;
+  const description = formData.get("description") as string;
+  const date = formData.get("date") as string;
+  const icon = formData.get("icon") as string;
+  const url = formData.get("url") as string;
+  const order = parseInt(formData.get("order") as string || "0");
+
+  await prisma.achievement.update({
+    where: { id },
+    data: {
+      title,
+      description: description || null,
+      date: new Date(date),
+      icon: icon || null,
+      url: url || null,
+      order,
+    },
+  });
+
+  revalidatePath("/");
+  revalidatePath("/admin/achievements");
+}
+
+export async function deleteAchievement(id: string) {
+  const session = await checkAdminSession();
+  if (!session) throw new Error("Unauthorized");
+
+  await prisma.achievement.delete({ where: { id } });
+  revalidatePath("/");
+  revalidatePath("/admin/achievements");
+}

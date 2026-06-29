@@ -12,6 +12,7 @@ const navItems = [
   { href: "/admin/projects", label: "Projects" },
   { href: "/admin/skills", label: "Skills" },
   { href: "/admin/certifications", label: "Certifications" },
+  { href: "/admin/achievements", label: "Achievements" },
   { href: "/admin/messages", label: "Messages" },
 ];
 

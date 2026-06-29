@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
-  const [profile, experiences, education, projects, skills, certifications, messages] =
+  const [profile, experiences, education, projects, skills, certifications, achievements, messages] =
     await Promise.all([
       prisma.profile.findFirst(),
       prisma.experience.count(),
@@ -11,6 +11,7 @@ export default async function AdminDashboard() {
       prisma.project.count(),
       prisma.skill.count(),
       prisma.certification.count(),
+      prisma.achievement.count(),
       prisma.message.count(),
     ]);
 
@@ -35,6 +36,7 @@ export default async function AdminDashboard() {
         <StatCard label="Projects" value={projects} href="/admin/projects" />
         <StatCard label="Skills" value={skills} href="/admin/skills" />
         <StatCard label="Certifications" value={certifications} href="/admin/certifications" />
+        <StatCard label="Achievements" value={achievements} href="/admin/achievements" />
         <StatCard label="Messages" value={messages} href="/admin/messages" />
       </div>
     </div>

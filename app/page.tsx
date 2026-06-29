@@ -6,12 +6,13 @@ import { Education } from "@/components/profile/Education";
 import { Projects } from "@/components/profile/Projects";
 import { Skills } from "@/components/profile/Skills";
 import { Certifications } from "@/components/profile/Certifications";
+import { Achievements } from "@/components/profile/Achievements";
 import { ContactForm } from "@/components/profile/ContactForm";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [profile, experiences, education, projects, skills, certifications] =
+  const [profile, experiences, education, projects, skills, certifications, achievements] =
     await Promise.all([
       prisma.profile.findFirst(),
       prisma.experience.findMany({ orderBy: { order: "asc" } }),
@@ -19,6 +20,7 @@ export default async function Home() {
       prisma.project.findMany({ orderBy: { order: "asc" } }),
       prisma.skill.findMany({ orderBy: { order: "asc" } }),
       prisma.certification.findMany({ orderBy: { date: "desc" } }),
+      prisma.achievement.findMany({ orderBy: { order: "asc" } }),
     ]);
 
   if (!profile) {
@@ -46,6 +48,7 @@ export default async function Home() {
         <div id="projects"><Projects items={projects} /></div>
         <div id="skills"><Skills items={skills} /></div>
         <Certifications items={certifications} />
+        <Achievements items={achievements} />
         <div id="contact"><ContactForm /></div>
       </div>
     </main>
