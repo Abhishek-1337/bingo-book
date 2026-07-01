@@ -15,7 +15,9 @@ export function Projects({ items }: { items: Project[] }) {
 
   return (
     <div className="card p-6">
-      <h2 className="section-title">Projects</h2>
+      <h2 className="section-title">
+        Projects <span className="text-sm font-normal opacity-60">({items.length})</span>
+      </h2>
       <div className="grid gap-4 sm:grid-cols-2">
         {items.map((project) => (
           <ProjectCard key={project.id} project={project} />
