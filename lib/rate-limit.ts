@@ -1,4 +1,6 @@
-const attempts = new Map<string, { count: number; resetAt: number }>();
+type Record = { count: number; windowStart: number; lockedUntil: number };
+
+const attempts = new Map<string, Record>();
 
 const MAX_ATTEMPTS = 5;
 const WINDOW_MS = 15 * 60 * 1000; // 15 minutes
@@ -8,13 +10,26 @@ export function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: num
   const now = Date.now();
   const record = attempts.get(ip);
 
-  if (!record || now > record.resetAt) {
-    attempts.set(ip, { count: 1, resetAt: now + WINDOW_MS });
+  if (!record) {
+    attempts.set(ip, { count: 1, windowStart: now, lockedUntil: 0 });
+    return { allowed: true };
+  }
+
+  if (record.lockedUntil && now < record.lockedUntil) {
+    const retryAfter = Math.ceil((record.lockedUntil - now) / 1000);
+    return { allowed: false, retryAfter };
+  }
+
+  if (now - record.windowStart > WINDOW_MS) {
+    record.count = 1;
+    record.windowStart = now;
+    record.lockedUntil = 0;
     return { allowed: true };
   }
 
   if (record.count >= MAX_ATTEMPTS) {
-    const retryAfter = Math.ceil((record.resetAt - now) / 1000);
+    record.lockedUntil = now + LOCKOUT_MS;
+    const retryAfter = Math.ceil(LOCKOUT_MS / 1000);
     return { allowed: false, retryAfter };
   }
 
