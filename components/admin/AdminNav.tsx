@@ -29,7 +29,7 @@ export function AdminNav() {
             className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
               pathname === item.href
                 ? "bg-accent text-white"
-                : "text-foreground hover:bg-gray-100 dark:hover:bg-gray-800"
+                : "text-foreground hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-200"
             }`}
           >
             {item.label}
@@ -41,7 +41,7 @@ export function AdminNav() {
         <a
           href="/"
           target="_blank"
-          className="block rounded-lg px-3 py-2 text-sm font-medium text-foreground hover:bg-gray-100 dark:hover:bg-gray-800"
+          className="block rounded-lg px-3 py-2 text-sm font-medium text-foreground hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-200"
         >
           View Portfolio
         </a>
