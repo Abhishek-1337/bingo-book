@@ -1,27 +1,24 @@
 "use client";
-
 import { useEffect, useState } from "react";
 
+// theme — isolated toggle
 export function ThemeToggle() {
   const [dark, setDark] = useState(true);
-
   useEffect(() => {
-    const stored = localStorage.getItem("theme");
-    const isDark = stored ? stored === "dark" : true;
-    setDark(isDark);
-    document.documentElement.classList.toggle("dark", isDark);
+    const s = localStorage.getItem("theme");
+    const d = s ? s === "dark" : true;
+    setDark(d);
+    document.documentElement.classList.toggle("dark", d);
   }, []);
-
   const toggle = () => {
-    const newDark = !dark;
-    setDark(newDark);
-    document.documentElement.classList.toggle("dark", newDark);
-    localStorage.setItem("theme", newDark ? "dark" : "light");
+    const n = !dark;
+    setDark(n);
+    document.documentElement.classList.toggle("dark", n);
+    localStorage.setItem("theme", n ? "dark" : "light");
   };
-
   return (
-    <button onClick={toggle} className="theme-toggle" aria-label="Toggle theme">
-      {dark ? "☀️" : "🌙"}
+    <button onClick={toggle} aria-label="Toggle theme" className="fixed bottom-6 right-6 z-50 h-11 w-11 rounded-full bg-card border border-line shadow-lg grid place-items-center hover:scale-105 transition-transform">
+      {dark ? "☀" : "☾"}
     </button>
   );
 }

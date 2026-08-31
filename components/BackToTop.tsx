@@ -1,24 +1,17 @@
 "use client";
-
 import { useEffect, useState } from "react";
 
+// back to top — isolated
 export function BackToTop() {
   const [show, setShow] = useState(false);
-
   useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 400);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const fn = () => setShow(window.scrollY > 400);
+    window.addEventListener("scroll", fn);
+    return () => window.removeEventListener("scroll", fn);
   }, []);
-
   if (!show) return null;
-
   return (
-    <button
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className="fixed bottom-24 right-6 w-12 h-12 rounded-full bg-card border-2 border-yellow-400 shadow-lg flex items-center justify-center text-foreground hover:scale-110 transition-all z-50 animate-pulse"
-      aria-label="Back to top"
-    >
+    <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Back to top" className="fixed bottom-6 right-[68px] z-50 h-11 w-11 rounded-full bg-ink text-bg grid place-items-center shadow-lg hover:scale-105 transition-transform">
       ↑
     </button>
   );
