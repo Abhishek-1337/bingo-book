@@ -1,27 +1,17 @@
 import { ProjectCard } from "./ProjectCard";
+type Project = { id: string; title: string; description?: string | null; image?: string | null; url?: string | null; githubUrl?: string | null; tags: string[] };
 
-type Project = {
-  id: string;
-  title: string;
-  description?: string | null;
-  image?: string | null;
-  url?: string | null;
-  githubUrl?: string | null;
-  tags: string[];
-};
-
+// projects — grid isolated
 export function Projects({ items }: { items: Project[] }) {
-  if (items.length === 0) return null;
-
+  if (!items.length) return null;
   return (
-    <div className="card p-6">
-      <h2 className="section-title">
-        Projects <span className="text-sm font-normal opacity-60">({items.length})</span>
-      </h2>
+    <div className="iso-card p-6 md:p-7">
+      <div className="flex items-center justify-between mb-5">
+        <span className="iso-tab"><b>03</b> Projects</span>
+        <span className="font-mono text-[11px] px-2.5 py-1 rounded-full bg-ink text-bg">{items.length} works</span>
+      </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        {items.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
+        {items.map((p) => <ProjectCard key={p.id} project={p} />)}
       </div>
     </div>
   );

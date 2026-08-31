@@ -1,62 +1,36 @@
 import Image from "next/image";
 
 type Experience = {
-  id: string;
-  company: string;
-  role: string;
-  logo?: string | null;
-  description?: string | null;
-  startDate: Date;
-  endDate?: Date | null;
-  current: boolean;
+  id: string; company: string; role: string; logo?: string | null;
+  description?: string | null; startDate: Date; endDate?: Date | null; current: boolean;
 };
 
-function formatDate(date: Date) {
-  return new Date(date).toLocaleDateString("en-US", {
-    month: "short",
-    year: "numeric",
-  });
-}
+function fmt(d: Date) { return new Date(d).toLocaleDateString("en-US", { month: "short", year: "numeric" }); }
 
-function dateRange(exp: Experience) {
-  const start = formatDate(exp.startDate);
-  const end = exp.current ? "Present" : exp.endDate ? formatDate(exp.endDate) : "";
-  return `${start} - ${end}`;
-}
-
+// experience — timeline isolated
 export function Experience({ items }: { items: Experience[] }) {
-  if (items.length === 0) return null;
-
+  if (!items.length) return null;
   return (
-    <div className="card p-6">
-      <h2 className="section-title">Experience</h2>
-      <div className="space-y-6">
-        {items.map((exp) => (
-          <div key={exp.id} className="flex gap-4">
-            <div className="relative h-12 w-12 flex-shrink-0 rounded bg-gray-100 overflow-hidden">
-              {exp.logo ? (
-                <Image
-                  src={exp.logo}
-                  alt={exp.company}
-                  fill
-                  className="object-contain p-1"
-                  sizes="48px"
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center text-lg font-bold text-gray-400">
-                  {exp.company.charAt(0)}
-                </div>
-              )}
-            </div>
-            <div>
-              <h3 className="font-semibold text-foreground">{exp.role}</h3>
-              <p className="text-foreground">{exp.company}</p>
-              <p className="text-sm text-text-secondary">{dateRange(exp)}</p>
-              {exp.description && (
-                <p className="mt-2 text-sm text-text-secondary leading-relaxed whitespace-pre-wrap">
-                  {exp.description}
-                </p>
-              )}
+    <div className="iso-card p-6 md:p-7">
+      <div className="flex items-center justify-between mb-6">
+        <span className="iso-tab"><b>02</b> Experience</span>
+        <span className="section-label">{items.length} roles</span>
+      </div>
+      <div className="relative pl-6 border-l border-line space-y-6">
+        {items.map((e) => (
+          <div key={e.id} className="relative">
+            {/* dot */}
+            <span className="absolute -left-[29px] top-2 h-[10px] w-[10px] rounded-full bg-accent border-2 border-card shadow" />
+            <div className="flex gap-4">
+              <div className="h-11 w-11 rounded-xl bg-bg-soft border border-line overflow-hidden grid place-items-center shrink-0">
+                {e.logo ? <Image src={e.logo} alt={e.company} width={44} height={44} className="object-contain p-1" /> : <span className="font-bold text-muted">{e.company[0]}</span>}
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold text-[15px]">{e.role}</h3>
+                <p className="text-sm text-accent font-medium">{e.company}</p>
+                <p className="font-mono text-[11px] tracking-wide text-muted mt-1">{fmt(e.startDate)} — {e.current ? "Present" : e.endDate ? fmt(e.endDate) : ""} {e.current && "· Now"}</p>
+                {e.description && <p className="mt-2 text-sm leading-relaxed text-muted whitespace-pre-wrap">{e.description}</p>}
+              </div>
             </div>
           </div>
         ))}

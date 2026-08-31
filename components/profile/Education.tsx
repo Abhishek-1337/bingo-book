@@ -1,55 +1,27 @@
 import Image from "next/image";
 
-type Education = {
-  id: string;
-  school: string;
-  degree: string;
-  field?: string | null;
-  logo?: string | null;
-  startDate: Date;
-  endDate?: Date | null;
-};
+type Edu = { id: string; school: string; degree: string; field?: string | null; logo?: string | null; startDate: Date; endDate?: Date | null };
+function fmt(d: Date) { return new Date(d).toLocaleDateString("en-US", { month: "short", year: "numeric" }); }
 
-function formatDate(date: Date) {
-  return new Date(date).toLocaleDateString("en-US", {
-    month: "short",
-    year: "numeric",
-  });
-}
-
-export function Education({ items }: { items: Education[] }) {
-  if (items.length === 0) return null;
-
+// education — minimal isolated
+export function Education({ items }: { items: Edu[] }) {
+  if (!items.length) return null;
   return (
-    <div className="card p-6">
-      <h2 className="section-title">Education</h2>
-      <div className="space-y-6">
-        {items.map((edu) => (
-          <div key={edu.id} className="flex gap-4">
-            <div className="relative h-12 w-12 flex-shrink-0 rounded bg-gray-100 overflow-hidden">
-              {edu.logo ? (
-                <Image
-                  src={edu.logo}
-                  alt={edu.school}
-                  fill
-                  className="object-contain p-1"
-                  sizes="48px"
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center text-lg font-bold text-gray-400">
-                  {edu.school.charAt(0)}
-                </div>
-              )}
+    <div className="iso-card p-6 md:p-7">
+      <div className="flex items-center justify-between mb-6">
+        <span className="iso-tab"><b>—</b> Education</span>
+        <span className="section-label">Study</span>
+      </div>
+      <div className="space-y-5">
+        {items.map((e) => (
+          <div key={e.id} className="flex gap-4 p-3 rounded-2xl bg-bg-soft border border-line/60">
+            <div className="h-10 w-10 rounded-lg bg-card border border-line grid place-items-center overflow-hidden shrink-0">
+              {e.logo ? <Image src={e.logo} alt={e.school} width={40} height={40} className="object-contain p-1" /> : <span className="text-sm font-bold text-muted">{e.school[0]}</span>}
             </div>
             <div>
-              <h3 className="font-semibold text-foreground">{edu.school}</h3>
-              <p className="text-foreground">
-                {edu.degree}
-                {edu.field ? ` - ${edu.field}` : ""}
-              </p>
-              <p className="text-sm text-text-secondary">
-                {formatDate(edu.startDate)} - {edu.endDate ? formatDate(edu.endDate) : "Present"}
-              </p>
+              <h3 className="text-sm font-semibold">{e.school}</h3>
+              <p className="text-sm text-muted">{e.degree}{e.field ? ` · ${e.field}` : ""}</p>
+              <p className="font-mono text-[11px] text-muted mt-1">{fmt(e.startDate)} — {e.endDate ? fmt(e.endDate) : "Present"}</p>
             </div>
           </div>
         ))}

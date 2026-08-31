@@ -1,53 +1,25 @@
-type Achievement = {
-  id: string;
-  title: string;
-  description?: string | null;
-  date: Date;
-  icon?: string | null;
-  url?: string | null;
-};
+type Ach = { id: string; title: string; description?: string | null; date: Date; icon?: string | null; url?: string | null };
+function fmt(d: Date) { return new Date(d).toLocaleDateString("en-US", { month: "short", year: "numeric" }); }
 
-function formatDate(date: Date) {
-  return new Date(date).toLocaleDateString("en-US", {
-    month: "short",
-    year: "numeric",
-  });
-}
-
-export function Achievements({ items }: { items: Achievement[] }) {
-  if (items.length === 0) return null;
-
+// achievements — bento isolated
+export function Achievements({ items }: { items: Ach[] }) {
+  if (!items.length) return null;
   return (
-    <div className="card p-6">
-      <h2 className="section-title">Achievements</h2>
-      <div className="grid gap-4 sm:grid-cols-2">
-        {items.map((achievement) => (
-          <div
-            key={achievement.id}
-            className="flex items-start gap-4 p-4 rounded-xl bg-project-card text-project-card-text"
-          >
-            <div className="text-3xl">{achievement.icon || "🏆"}</div>
-            <div className="flex-1">
-              <h3 className="font-semibold">
-                {achievement.url ? (
-                  <a
-                    href={achievement.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:underline"
-                  >
-                    {achievement.title}
-                  </a>
-                ) : (
-                  achievement.title
-                )}
-              </h3>
-              {achievement.description && (
-                <p className="mt-1 text-sm opacity-80 line-clamp-2">
-                  {achievement.description}
-                </p>
-              )}
-              <p className="mt-2 text-xs opacity-60">{formatDate(achievement.date)}</p>
+    <div className="iso-card p-6 md:p-7">
+      <div className="flex items-center justify-between mb-5">
+        <span className="iso-tab"><b>—</b> Achievements</span>
+        <span className="section-label">Highlights</span>
+      </div>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {items.map((a) => (
+          <div key={a.id} className="rounded-2xl bg-bg-soft border border-line p-4 flex gap-3">
+            <span className="text-xl shrink-0">{a.icon || "◆"}</span>
+            <div className="min-w-0">
+              <div className="text-sm font-semibold leading-tight">
+                {a.url ? <a href={a.url} target="_blank" className="hover:underline">{a.title} ↗</a> : a.title}
+              </div>
+              {a.description && <p className="mt-1 text-xs leading-relaxed text-muted line-clamp-2">{a.description}</p>}
+              <p className="mt-1.5 font-mono text-[10px] tracking-wide text-muted">{fmt(a.date)}</p>
             </div>
           </div>
         ))}

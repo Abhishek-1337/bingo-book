@@ -1,47 +1,24 @@
-type Certification = {
-  id: string;
-  name: string;
-  issuer: string;
-  date: Date;
-  url?: string | null;
-  image?: string | null;
-};
+type Cert = { id: string; name: string; issuer: string; date: Date; url?: string | null };
+function fmt(d: Date) { return new Date(d).toLocaleDateString("en-US", { month: "short", year: "numeric" }); }
 
-function formatDate(date: Date) {
-  return new Date(date).toLocaleDateString("en-US", {
-    month: "short",
-    year: "numeric",
-  });
-}
-
-export function Certifications({ items }: { items: Certification[] }) {
-  if (items.length === 0) return null;
-
+// certs — list isolated
+export function Certifications({ items }: { items: Cert[] }) {
+  if (!items.length) return null;
   return (
-    <div className="card p-6">
-      <h2 className="section-title">Certifications</h2>
-      <div className="space-y-4">
-        {items.map((cert) => (
-          <div key={cert.id} className="flex items-start gap-3">
-            <div className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-accent" />
-            <div>
-              <h3 className="font-semibold text-foreground">
-                {cert.url ? (
-                  <a
-                    href={cert.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:underline"
-                  >
-                    {cert.name}
-                  </a>
-                ) : (
-                  cert.name
-                )}
-              </h3>
-              <p className="text-sm text-text-secondary">
-                {cert.issuer} · {formatDate(cert.date)}
-              </p>
+    <div className="iso-card p-6 md:p-7">
+      <div className="flex items-center justify-between mb-5">
+        <span className="iso-tab"><b>—</b> Certifications</span>
+        <span className="section-label">Verified</span>
+      </div>
+      <div className="divide-y divide-line">
+        {items.map((c) => (
+          <div key={c.id} className="flex gap-3 py-3">
+            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+            <div className="flex-1 min-w-0">
+              <div className="text-sm font-semibold leading-tight">
+                {c.url ? <a href={c.url} target="_blank" className="hover:text-accent hover:underline">{c.name} ↗</a> : c.name}
+              </div>
+              <div className="font-mono text-[11px] text-muted mt-1">{c.issuer} · {fmt(c.date)}</div>
             </div>
           </div>
         ))}
