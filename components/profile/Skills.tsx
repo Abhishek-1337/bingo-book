@@ -1,39 +1,46 @@
 type Skill = { id: string; name: string; category: string; level?: string | null };
 
-const ICON: Record<string, string> = { Frontend: "◐", Backend: "⬢", DevOps: "⬡", Tools: "✦", "AI / ML": "✳" };
-const WIDTH: Record<string, string> = { Beginner: "25%", Intermediate: "50%", Advanced: "75%", Expert: "100%" };
+// dot level hint
+const levelDot: Record<string, string> = {
+  Beginner: "opacity-40",
+  Intermediate: "opacity-60",
+  Advanced: "opacity-80",
+  Expert: "opacity-100",
+};
 
-// skills — grouped isolated
+// skills — airy pill list (no heavy cards)
 export function Skills({ items }: { items: Skill[] }) {
   if (!items.length) return null;
   const grouped = items.reduce((a, s) => ((a[s.category] ??= []).push(s), a), {} as Record<string, Skill[]>);
+  const cats = Object.entries(grouped);
+
   return (
     <div className="iso-card p-6 md:p-7">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-5">
         <span className="iso-tab"><b>04</b> Skills</span>
         <span className="section-label">{items.length} tools</span>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
-        {Object.entries(grouped).map(([cat, list]) => (
-          <div key={cat} className="rounded-2xl border border-line bg-bg-soft p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="h-7 w-7 rounded-full bg-card border border-line grid place-items-center text-xs">{ICON[cat] ?? "•"}</span>
-              <span className="font-mono text-[11px] tracking-widest uppercase font-semibold">{cat}</span>
-              <span className="ml-auto font-mono text-[10px] text-muted">{list.length}</span>
+
+      <div className="divide-y divide-line/70">
+        {cats.map(([cat, list]) => (
+          <div key={cat} className="py-4 first:pt-0 last:pb-0 flex gap-4">
+            {/* category label */}
+            <div className="w-[92px] shrink-0 pt-1">
+              <div className="font-mono text-[10px] tracking-[0.16em] uppercase font-semibold text-muted">{cat}</div>
+              <div className="font-mono text-[10px] text-muted/60 mt-1">{list.length} items</div>
             </div>
-            <div className="space-y-3">
+            {/* pills */}
+            <div className="flex flex-wrap gap-1.5 content-start flex-1">
               {list.map((s) => (
-                <div key={s.id}>
-                  <div className="flex justify-between items-baseline">
-                    <span className="text-sm font-medium">{s.name}</span>
-                    {s.level && <span className="font-mono text-[10px] tracking-wide text-muted">{s.level}</span>}
-                  </div>
-                  {s.level && (
-                    <div className="mt-1.5 h-1.5 rounded-full bg-card border border-line overflow-hidden">
-                      <div className="h-full bg-accent rounded-full" style={{ width: WIDTH[s.level] ?? "50%" }} />
-                    </div>
-                  )}
-                </div>
+                <span
+                  key={s.id}
+                  title={s.level ?? undefined}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-line bg-card-soft text-[13px] leading-none"
+                >
+                  <span className={`h-1.5 w-1.5 rounded-full bg-accent ${s.level ? levelDot[s.level] ?? "opacity-60" : "opacity-30"}`} />
+                  {s.name}
+                  {s.level && <span className="font-mono text-[10px] text-muted ml-0.5">· {s.level[0]}</span>}
+                </span>
               ))}
             </div>
           </div>
