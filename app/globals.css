@@ -97,10 +97,17 @@ body::before {
 
 /* titles */
 .display {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-weight: 400;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  font-optical-sizing: auto;
+}
+.name-display {
+  font-family: var(--font-geist-sans);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
 }
 .section-label {
   font-family: var(--font-mono);

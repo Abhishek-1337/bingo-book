@@ -51,7 +51,7 @@ export function ProfileHeader({ profile }: { profile: Profile }) {
         {/* name */}
         <div className="mt-5 grid md:grid-cols-[1.35fr_0.65fr] gap-6 items-start">
           <div>
-            <h1 className="display text-[28px] md:text-[32px] tracking-wide">{profile.name}</h1>
+            <h1 className="name-display text-[34px] md:text-[40px]">{profile.name}</h1>
             <p className="mt-2 font-mono text-xs tracking-[0.16em] uppercase text-accent">{profile.headline}</p>
             {profile.location && <p className="mt-2 text-sm text-muted">{profile.location} · {profile.email}</p>}
           </div>
