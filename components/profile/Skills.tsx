@@ -1,43 +1,50 @@
 type Skill = { id: string; name: string; category: string; level?: string | null };
 
-const ICON: Record<string, string> = { Frontend: "◐", Backend: "⬢", DevOps: "⬡", Tools: "✦", "AI / ML": "✳" };
-const WIDTH: Record<string, string> = { Beginner: "25%", Intermediate: "50%", Advanced: "75%", Expert: "100%" };
+// level -> subtle opacity hint, not a bar
+const levelStyle: Record<string, string> = {
+  Expert: "font-medium opacity-100",
+  Advanced: "opacity-80",
+  Intermediate: "opacity-60",
+  Beginner: "opacity-50",
+};
 
-// skills — one card per row, scrollable
+// skills — editorial index, no cards, no bars
 export function Skills({ items }: { items: Skill[] }) {
   if (!items.length) return null;
   const grouped = items.reduce((a, s) => ((a[s.category] ??= []).push(s), a), {} as Record<string, Skill[]>);
+
   return (
     <div className="iso-card p-6 md:p-7">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-6">
         <span className="iso-tab"><b>04</b> Skills</span>
         <span className="section-label">{items.length} tools</span>
       </div>
-      <div className="grid gap-3 max-h-[420px] overflow-y-auto pr-1 -mr-1 overscroll-contain scrollbar-thin">
+
+      <div className="divide-y divide-line/60">
         {Object.entries(grouped).map(([cat, list]) => (
-          <div key={cat} className="rounded-2xl border border-line bg-bg-soft p-4 shrink-0">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="h-7 w-7 rounded-full bg-card border border-line grid place-items-center text-xs">{ICON[cat] ?? "•"}</span>
-              <span className="font-mono text-[11px] tracking-widest uppercase font-semibold">{cat}</span>
-              <span className="ml-auto font-mono text-[10px] text-muted">{list.length}</span>
+          <div key={cat} className="flex gap-5 py-4 first:pt-0 last:pb-0">
+            <div className="w-[88px] shrink-0">
+              <div className="font-mono text-[10px] tracking-[0.16em] uppercase font-semibold text-muted">{cat}</div>
+              <div className="mt-1 h-px w-6 bg-accent/40" />
             </div>
-            <div className="space-y-3">
-              {list.map((s) => (
-                <div key={s.id}>
-                  <div className="flex justify-between items-baseline">
-                    <span className="text-sm font-medium">{s.name}</span>
-                    {s.level && <span className="font-mono text-[10px] tracking-wide text-muted">{s.level}</span>}
-                  </div>
-                  {s.level && (
-                    <div className="mt-1.5 h-1.5 rounded-full bg-card border border-line overflow-hidden">
-                      <div className="h-full bg-accent rounded-full" style={{ width: WIDTH[s.level] ?? "50%" }} />
-                    </div>
-                  )}
-                </div>
+            <div className="flex flex-wrap gap-x-4 gap-y-2 min-w-0 flex-1">
+              {list.map((s, i) => (
+                <span key={s.id} className="inline-flex items-baseline gap-1.5 text-[13.5px] leading-none">
+                  <span className={levelStyle[s.level ?? ""] ?? "opacity-70"}>{s.name}</span>
+                  {s.level && <span className="font-mono text-[10px] tracking-wide text-muted">{s.level}</span>}
+                  {i < list.length - 1 && <span className="text-muted/25 ml-1">·</span>}
+                </span>
               ))}
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="mt-5 flex gap-1.5 font-mono text-[10px] text-muted/60">
+        <span className="opacity-100">Expert</span>
+        <span>·</span>
+        <span className="opacity-60">Beginner</span>
+        <span className="ml-auto hidden sm:inline">ordered by proficiency</span>
       </div>
     </div>
   );
