@@ -42,10 +42,6 @@ export function ProfileHeader({ profile }: { profile: Profile }) {
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="font-mono text-xs tracking-wide uppercase text-muted">Open to collaborations</span>
           </div>
-          <div className="ml-auto hidden sm:flex gap-2 pb-2">
-            {profile.github && <a href={profile.github} target="_blank" className="btn-b py-1.5 text-xs">GitHub ↗</a>}
-            {profile.linkedin && <a href={profile.linkedin} target="_blank" className="btn-a py-1.5 text-xs">LinkedIn</a>}
-          </div>
         </div>
 
         {/* name */}
