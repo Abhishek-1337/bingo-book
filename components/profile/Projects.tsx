@@ -7,7 +7,7 @@ export function Projects({ items }: { items: Project[] }) {
   return (
     <div className="iso-card p-6 md:p-7">
       <div className="flex items-center justify-between mb-5">
-        <span className="iso-tab"><b>03</b> Projects</span>
+        <span className="iso-tab">Projects</span>
         <span className="section-label">{items.length} works</span>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">

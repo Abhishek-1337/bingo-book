@@ -13,7 +13,7 @@ export function Experience({ items }: { items: Experience[] }) {
   return (
     <div className="iso-card p-6 md:p-7">
       <div className="flex items-center justify-between mb-6">
-        <span className="iso-tab"><b>02</b> Experience</span>
+        <span className="iso-tab">Experience</span>
         <span className="section-label">{items.length} roles</span>
       </div>
       <div className="relative pl-6 border-l border-line space-y-6">

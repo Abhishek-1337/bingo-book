@@ -16,7 +16,7 @@ export function Skills({ items }: { items: Skill[] }) {
   return (
     <div className="iso-card p-6 md:p-7">
       <div className="flex items-center justify-between mb-6">
-        <span className="iso-tab"><b>04</b> Skills</span>
+        <span className="iso-tab">Skills</span>
         <span className="section-label">{items.length} tools</span>
       </div>
 

@@ -7,7 +7,7 @@ export function Certifications({ items }: { items: Cert[] }) {
   return (
     <div className="iso-card p-6 md:p-7">
       <div className="flex items-center justify-between mb-5">
-        <span className="iso-tab"><b>—</b> Certifications</span>
+        <span className="iso-tab">Certifications</span>
         <span className="section-label">Verified</span>
       </div>
       <div className="divide-y divide-line">

@@ -7,7 +7,7 @@ export function Achievements({ items }: { items: Ach[] }) {
   return (
     <div className="iso-card p-6 md:p-7">
       <div className="flex items-center justify-between mb-5">
-        <span className="iso-tab"><b>—</b> Achievements</span>
+        <span className="iso-tab">Achievements</span>
         <span className="section-label">Highlights</span>
       </div>
       <div className="grid gap-3 sm:grid-cols-2">

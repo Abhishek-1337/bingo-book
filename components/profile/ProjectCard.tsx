@@ -9,6 +9,7 @@ type Project = { id: string; title: string; description?: string | null; image?:
 export function ProjectCard({ project }: { project: Project }) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [imgOk, setImgOk] = useState(true);
   useEffect(() => setMounted(true), []);
   useEffect(() => {
     if (!open) return;
@@ -24,12 +25,13 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <>
       <button onClick={() => setOpen(true)} className="text-left w-full group rounded-2xl border border-line bg-card-soft overflow-hidden hover:border-accent/40 hover:shadow-lg transition-colors">
-        {project.image && (
-          <div className="relative h-[156px] w-full overflow-hidden bg-bg-soft">
-            <Image src={project.image} alt={project.title} fill className="object-cover group-hover:scale-[1.03] transition-transform duration-500" sizes="400px" />
-            <div className="absolute top-3 left-3 font-mono text-[11px] tracking-wide uppercase bg-card/90 backdrop-blur px-2 py-1 rounded-full border border-line">View ↗</div>
-          </div>
-        )}
+        <div className="relative h-[156px] w-full overflow-hidden bg-bg-soft grid place-items-center">
+          <span aria-hidden="true" className="display text-[40px] leading-none text-muted/30 select-none">{project.title.charAt(0)}</span>
+          {project.image && imgOk && (
+            <Image src={project.image} alt={project.title} fill onError={() => setImgOk(false)} className="object-cover group-hover:scale-[1.03] transition-transform duration-500" sizes="400px" />
+          )}
+          <div className="absolute top-3 left-3 font-mono text-[11px] tracking-wide uppercase bg-card/90 backdrop-blur px-2 py-1 rounded-full border border-line">View ↗</div>
+        </div>
         <div className="p-4">
           <h3 className="t-title">{project.title}</h3>
           {project.description && <p className="t-desc mt-1.5 line-clamp-2">{project.description}</p>}
@@ -47,11 +49,12 @@ export function ProjectCard({ project }: { project: Project }) {
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
             <div className="absolute inset-0 bg-ink/50 backdrop-blur-sm" onClick={() => setOpen(false)} />
             <div className="relative w-full max-w-lg rounded-2xl bg-card border border-line overflow-hidden shadow-2xl max-h-[90vh] overflow-y-auto">
-              {project.image && (
-                <div className="relative h-[240px] w-full bg-bg-soft">
-                  <Image src={project.image} alt={project.title} fill className="object-cover" sizes="600px" />
-                </div>
-              )}
+              <div className="relative h-[240px] w-full bg-bg-soft grid place-items-center">
+                <span aria-hidden="true" className="display text-6xl leading-none text-muted/30 select-none">{project.title.charAt(0)}</span>
+                {project.image && imgOk && (
+                  <Image src={project.image} alt={project.title} fill onError={() => setImgOk(false)} className="object-cover" sizes="600px" />
+                )}
+              </div>
               <div className="p-6">
                 <div className="flex justify-between gap-4">
                   <h3 className="card-h">{project.title}</h3>

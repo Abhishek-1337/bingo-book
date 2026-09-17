@@ -9,7 +9,7 @@ export function Education({ items }: { items: Edu[] }) {
   return (
     <div className="iso-card p-6 md:p-7">
       <div className="flex items-center justify-between mb-6">
-        <span className="iso-tab"><b>—</b> Education</span>
+        <span className="iso-tab">Education</span>
         <span className="section-label">Study</span>
       </div>
       <div className="space-y-5">
