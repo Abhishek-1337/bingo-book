@@ -15,10 +15,10 @@ export function Certifications({ items }: { items: Cert[] }) {
           <div key={c.id} className="flex gap-3 py-3">
             <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
             <div className="flex-1 min-w-0">
-              <div className="text-sm font-semibold leading-tight">
+              <div className="text-[14px] font-semibold leading-tight">
                 {c.url ? <a href={c.url} target="_blank" className="hover:text-accent hover:underline">{c.name} ↗</a> : c.name}
               </div>
-              <div className="font-mono text-[11px] text-muted mt-1">{c.issuer} · {fmt(c.date)}</div>
+              <div className="font-mono text-xs text-muted mt-1">{c.issuer} · {fmt(c.date)}</div>
             </div>
           </div>
         ))}

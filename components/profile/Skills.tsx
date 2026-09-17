@@ -24,14 +24,14 @@ export function Skills({ items }: { items: Skill[] }) {
         {Object.entries(grouped).map(([cat, list]) => (
           <div key={cat} className="flex gap-5 py-4 first:pt-0 last:pb-0">
             <div className="w-[88px] shrink-0">
-              <div className="font-mono text-[10px] tracking-[0.16em] uppercase font-semibold text-muted">{cat}</div>
+              <div className="font-mono text-[11px] tracking-[0.1em] uppercase font-semibold text-muted">{cat}</div>
               <div className="mt-1 h-px w-6 bg-accent/40" />
             </div>
             <div className="flex flex-wrap gap-x-4 gap-y-2 min-w-0 flex-1">
               {list.map((s, i) => (
-                <span key={s.id} className="inline-flex items-baseline gap-1.5 text-[13.5px] leading-none">
-                  <span className={levelStyle[s.level ?? ""] ?? "opacity-70"}>{s.name}</span>
-                  {s.level && <span className="font-mono text-[10px] tracking-wide text-muted">{s.level}</span>}
+                <span key={s.id} className="inline-flex items-baseline gap-1.5 text-[14px] leading-none">
+                  <span className={levelStyle[s.level ?? ""] ?? "opacity-80"}>{s.name}</span>
+                  {s.level && <span className="font-mono text-[11px] tracking-wide text-muted">{s.level}</span>}
                   {i < list.length - 1 && <span className="text-muted/25 ml-1">·</span>}
                 </span>
               ))}
@@ -40,7 +40,7 @@ export function Skills({ items }: { items: Skill[] }) {
         ))}
       </div>
 
-      <div className="mt-5 flex gap-1.5 font-mono text-[10px] text-muted/60">
+      <div className="mt-5 flex gap-1.5 font-mono text-[11px] text-muted/70">
         <span className="opacity-100">Expert</span>
         <span>·</span>
         <span className="opacity-60">Beginner</span>

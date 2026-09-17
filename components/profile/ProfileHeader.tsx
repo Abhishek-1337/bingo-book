@@ -25,7 +25,7 @@ export function ProfileHeader({ profile }: { profile: Profile }) {
           <Image src={profile.coverImage} alt="Cover" fill className="object-cover mix-blend-luminosity opacity-80" sizes="1160px" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-        <div className="absolute top-4 left-6 font-mono text-[10px] tracking-[0.2em] uppercase text-white/70">Portfolio — Archive № 01</div>
+        <div className="absolute top-4 left-6 font-mono text-[11px] tracking-[0.14em] uppercase text-white/80">Portfolio — Archive № 01</div>
       </div>
 
       <div className="relative px-6 md:px-8 pb-7">
@@ -40,7 +40,7 @@ export function ProfileHeader({ profile }: { profile: Profile }) {
           </div>
           <div className="hidden md:flex items-center gap-2 pb-3">
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="font-mono text-[11px] tracking-widest uppercase text-muted">Open to collaborations</span>
+            <span className="font-mono text-xs tracking-wide uppercase text-muted">Open to collaborations</span>
           </div>
           <div className="ml-auto hidden sm:flex gap-2 pb-2">
             {profile.github && <a href={profile.github} target="_blank" className="btn-b py-1.5 text-xs">GitHub ↗</a>}
@@ -52,11 +52,11 @@ export function ProfileHeader({ profile }: { profile: Profile }) {
         <div className="mt-5 grid md:grid-cols-[1.35fr_0.65fr] gap-6 items-start">
           <div>
             <h1 className="name-display text-[34px] md:text-[40px]">{profile.name}</h1>
-            <p className="mt-2 font-mono text-xs tracking-[0.16em] uppercase text-accent">{profile.headline}</p>
-            {profile.location && <p className="mt-2 text-sm text-muted">{profile.location} · {profile.email}</p>}
+            <p className="mt-2 font-mono text-[13px] tracking-[0.08em] uppercase text-accent font-medium">{profile.headline}</p>
+            {profile.location && <p className="mt-2 text-[14.5px] text-[var(--muted-2)]">{profile.location} · {profile.email}</p>}
           </div>
           <div className="md:text-right">
-            <p className="text-[13px] leading-relaxed text-muted hidden md:block">
+            <p className="text-[14.5px] leading-relaxed text-[var(--muted-2)] hidden md:block">
               Building quietly — interfaces, systems, and small tools that feel good to use.
             </p>
             <div className="mt-3 flex md:justify-end flex-wrap gap-1.5">
@@ -69,7 +69,7 @@ export function ProfileHeader({ profile }: { profile: Profile }) {
               ]
                 .filter(Boolean)
                 .map((e: any) => (
-                  <a key={e[0]} href={e[1]} target="_blank" rel="noopener noreferrer" className="font-mono text-[11px] px-2.5 py-1 rounded-full border border-line bg-card-soft hover:bg-card transition-colors">
+                  <a key={e[0]} href={e[1]} target="_blank" rel="noopener noreferrer" className="font-mono text-xs px-2.5 py-1 rounded-full border border-line bg-card-soft hover:bg-card transition-colors">
                     {e[0]}
                   </a>
                 ))}
@@ -86,7 +86,7 @@ export function ProfileHeader({ profile }: { profile: Profile }) {
             ["04", "Skills", "#skills"],
             ["05", "Contact", "#contact"],
           ].map(([n, l, h]) => (
-            <a key={h} href={h} className="group flex items-center gap-2 rounded-full border border-line bg-bg-soft px-3 py-1.5 font-mono text-[11px] hover:border-accent/30 transition-colors">
+            <a key={h} href={h} className="group flex items-center gap-2 rounded-full border border-line bg-bg-soft px-3 py-1.5 font-mono text-xs hover:border-accent/30 transition-colors">
               <span className="text-accent font-bold">{n}</span>
               <span className="tracking-wide text-ink group-hover:text-accent">{l}</span>
             </a>
