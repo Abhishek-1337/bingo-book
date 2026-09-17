@@ -179,3 +179,106 @@ html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
 /* prose */
 .prose-muted { color: var(--muted-2); line-height: 1.7; }
+
+/* ——— admin compatibility layer (bridges old admin classes to new tokens) ——— */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(16,16,16,0.04), 0 1px 2px rgba(16,16,16,0.06);
+}
+.dark .card { box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 1px solid var(--ink);
+}
+.btn-primary:hover { background: #2a2a2a; transform: translateY(-1px); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1px solid var(--line);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.btn-secondary:hover { background: var(--card-soft); }
+
+.btn-danger {
+  background: transparent;
+  color: #dc2626;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1px solid #fecaca;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.btn-danger:hover { background: #dc2626; color: white; border-color: #dc2626; }
+.dark .btn-danger { border-color: rgba(220,38,38,0.4); }
+
+.input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card-soft);
+  color: var(--ink);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(198,124,78,0.15); }
+.input::placeholder { color: var(--muted); }
+
+.label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font-mono);
+}
+
+/* mapped legacy colors → new tokens for admin text/borders */
+.text-text-secondary { color: var(--muted); }
+.text-text-muted { color: var(--muted); }
+.text-foreground { color: var(--ink); }
+.border-card-border { border-color: var(--line); }
+.bg-card { background: var(--card); }
+.bg-card-border { background: var(--line); }
