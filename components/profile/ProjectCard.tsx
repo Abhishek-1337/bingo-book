@@ -24,18 +24,18 @@ export function ProjectCard({ project }: { project: Project }) {
   }, [open]);
   return (
     <>
-      <button onClick={() => setOpen(true)} className="text-left w-full group rounded-2xl border border-line bg-card-soft overflow-hidden hover:border-accent/40 hover:shadow-lg transition-colors">
-        <div className="relative h-[156px] w-full overflow-hidden bg-bg-soft grid place-items-center">
+      <button onClick={() => setOpen(true)} className="text-left w-full h-full flex flex-col group rounded-2xl border border-line bg-card-soft overflow-hidden hover:border-accent/40 hover:shadow-lg transition-colors">
+        <div className="relative h-[156px] w-full shrink-0 overflow-hidden bg-bg-soft grid place-items-center">
           <span aria-hidden="true" className="display text-[40px] leading-none text-muted/30 select-none">{project.title.charAt(0)}</span>
           {project.image && imgOk && (
             <Image src={project.image} alt={project.title} fill onError={() => setImgOk(false)} className="object-cover group-hover:scale-[1.03] transition-transform duration-500" sizes="400px" />
           )}
           <div className="absolute top-3 left-3 font-mono text-[11px] tracking-wide uppercase bg-card/90 backdrop-blur px-2 py-1 rounded-full border border-line">View ↗</div>
         </div>
-        <div className="p-4">
+        <div className="flex flex-1 flex-col p-4">
           <h3 className="t-title">{project.title}</h3>
-          {project.description && <p className="t-desc mt-1.5 line-clamp-2">{project.description}</p>}
-          <div className="mt-3 flex flex-wrap gap-1.5">
+          {project.description && <p className="t-desc mt-1.5 line-clamp-2 min-h-[3.4em]">{project.description}</p>}
+          <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
             {project.tags.map((t) => (
               <span key={t} className="font-mono text-[11px] tracking-wide px-2 py-1 rounded-full bg-card border border-line text-muted">{t}</span>
             ))}

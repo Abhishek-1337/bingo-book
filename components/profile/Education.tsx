@@ -16,7 +16,7 @@ export function Education({ items }: { items: Edu[] }) {
         {items.map((e) => (
           <div key={e.id} className="flex gap-4 p-3 rounded-2xl bg-bg-soft border border-line/60">
             <div className="h-10 w-10 rounded-lg bg-card border border-line grid place-items-center overflow-hidden shrink-0">
-              {e.logo ? <Image src={e.logo} alt={e.school} width={40} height={40} className="object-contain p-1" /> : <span className="text-sm font-bold text-muted">{e.school[0]}</span>}
+              {e.logo ? <Image src={e.logo} alt={e.school} width={40} height={40} className="h-full w-full object-contain p-1" /> : <span className="text-sm font-bold text-muted">{e.school[0]}</span>}
             </div>
             <div>
               <h3 className="t-title">{e.school}</h3>

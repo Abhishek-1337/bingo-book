@@ -23,7 +23,7 @@ export function Experience({ items }: { items: Experience[] }) {
             <span className="absolute -left-[29px] top-2 h-[10px] w-[10px] rounded-full bg-accent border-2 border-card shadow" />
             <div className="flex gap-4">
               <div className="h-11 w-11 rounded-xl bg-bg-soft border border-line overflow-hidden grid place-items-center shrink-0">
-                {e.logo ? <Image src={e.logo} alt={e.company} width={44} height={44} className="object-contain p-1" /> : <span className="font-bold text-muted">{e.company[0]}</span>}
+                {e.logo ? <Image src={e.logo} alt={e.company} width={44} height={44} className="h-full w-full object-contain p-1" /> : <span className="font-bold text-muted">{e.company[0]}</span>}
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="t-title">{e.role}</h3>

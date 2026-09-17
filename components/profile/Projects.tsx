@@ -10,7 +10,7 @@ export function Projects({ items }: { items: Project[] }) {
         <span className="iso-tab">Projects</span>
         <span className="section-label">{items.length} works</span>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 items-stretch">
         {items.map((p) => <ProjectCard key={p.id} project={p} />)}
       </div>
     </div>
