@@ -26,10 +26,10 @@ export function Experience({ items }: { items: Experience[] }) {
                 {e.logo ? <Image src={e.logo} alt={e.company} width={44} height={44} className="object-contain p-1" /> : <span className="font-bold text-muted">{e.company[0]}</span>}
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-[15.5px] leading-tight">{e.role}</h3>
-                <p className="text-[14px] text-accent font-medium">{e.company}</p>
-                <p className="font-mono text-xs tracking-wide text-muted mt-1">{fmt(e.startDate)} — {e.current ? "Present" : e.endDate ? fmt(e.endDate) : ""} {e.current && "· Now"}</p>
-                {e.description && <p className="mt-2 text-[14.5px] leading-[1.7] text-[var(--muted-2)] whitespace-pre-wrap">{e.description}</p>}
+                <h3 className="t-title">{e.role}</h3>
+                <p className="t-sub font-medium mt-0.5">{e.company}</p>
+                <p className="t-meta mt-1">{fmt(e.startDate)} — {e.current ? "Present" : e.endDate ? fmt(e.endDate) : ""} {e.current && "· Now"}</p>
+                {e.description && <p className="t-desc mt-2 whitespace-pre-wrap">{e.description}</p>}
               </div>
             </div>
           </div>

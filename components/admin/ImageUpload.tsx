@@ -133,7 +133,7 @@ export function ImageUpload({
           <button
             type="button"
             onClick={() => setUrlMode(true)}
-            className="text-xs text-text-secondary hover:text-text-primary"
+            className="text-xs text-text-secondary hover:text-foreground transition-colors"
           >
             Or paste URL
           </button>

@@ -11,7 +11,7 @@ export function BackToTop() {
   }, []);
   if (!show) return null;
   return (
-    <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Back to top" className="fixed bottom-6 right-[68px] z-50 h-11 w-11 rounded-full bg-ink text-bg grid place-items-center shadow-lg hover:scale-105 transition-transform">
+    <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Back to top" className="fixed bottom-6 right-[68px] z-50 h-11 w-11 rounded-full bg-ink text-bg grid place-items-center shadow-lg hover:scale-105 transition-transform hover:bg-[color-mix(in_srgb,var(--ink)_80%,transparent)]">
       ↑
     </button>
   );

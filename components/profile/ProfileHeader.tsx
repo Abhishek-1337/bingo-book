@@ -52,11 +52,11 @@ export function ProfileHeader({ profile }: { profile: Profile }) {
         <div className="mt-5 grid md:grid-cols-[1.35fr_0.65fr] gap-6 items-start">
           <div>
             <h1 className="name-display text-[34px] md:text-[40px]">{profile.name}</h1>
-            <p className="mt-2 font-mono text-[13px] tracking-[0.08em] uppercase text-accent font-medium">{profile.headline}</p>
-            {profile.location && <p className="mt-2 text-[14.5px] text-[var(--muted-2)]">{profile.location} · {profile.email}</p>}
+            <p className="mt-2 font-mono text-xs tracking-[0.08em] uppercase text-accent font-medium">{profile.headline}</p>
+            {profile.location && <p className="t-sub mt-2">{profile.location} · {profile.email}</p>}
           </div>
           <div className="md:text-right">
-            <p className="text-[14.5px] leading-relaxed text-[var(--muted-2)] hidden md:block">
+            <p className="t-sub leading-relaxed hidden md:block">
               Building quietly — interfaces, systems, and small tools that feel good to use.
             </p>
             <div className="mt-3 flex md:justify-end flex-wrap gap-1.5">
@@ -69,7 +69,7 @@ export function ProfileHeader({ profile }: { profile: Profile }) {
               ]
                 .filter(Boolean)
                 .map((e: any) => (
-                  <a key={e[0]} href={e[1]} target="_blank" rel="noopener noreferrer" className="font-mono text-xs px-2.5 py-1 rounded-full border border-line bg-card-soft hover:bg-card transition-colors">
+                  <a key={e[0]} href={e[1]} target="_blank" rel="noopener noreferrer" className="pill-link">
                     {e[0]}
                   </a>
                 ))}
@@ -86,7 +86,7 @@ export function ProfileHeader({ profile }: { profile: Profile }) {
             ["04", "Skills", "#skills"],
             ["05", "Contact", "#contact"],
           ].map(([n, l, h]) => (
-            <a key={h} href={h} className="group flex items-center gap-2 rounded-full border border-line bg-bg-soft px-3 py-1.5 font-mono text-xs hover:border-accent/30 transition-colors">
+            <a key={h} href={h} className="group flex items-center gap-2 rounded-full border border-line bg-bg-soft px-3 py-1.5 font-mono text-xs hover:border-accent/40 transition-colors">
               <span className="text-accent font-bold">{n}</span>
               <span className="tracking-wide text-ink group-hover:text-accent">{l}</span>
             </a>

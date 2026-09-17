@@ -7,8 +7,8 @@ export function About({ bio }: { bio?: string | null }) {
         <span className="iso-tab"><b>01</b> About</span>
         <span className="font-mono text-[11px] tracking-wide uppercase text-muted">— Biography</span>
       </div>
-      <h2 className="display text-[27px] mb-3">A quiet builder.</h2>
-      <p className="prose-muted whitespace-pre-wrap">{bio}</p>
+      <h2 className="card-h mb-3">A quiet builder.</h2>
+      <p className="lead whitespace-pre-wrap">{bio}</p>
     </div>
   );
 }

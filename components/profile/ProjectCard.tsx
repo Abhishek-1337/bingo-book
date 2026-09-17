@@ -23,7 +23,7 @@ export function ProjectCard({ project }: { project: Project }) {
   }, [open]);
   return (
     <>
-      <button onClick={() => setOpen(true)} className="text-left w-full group rounded-2xl border border-line bg-card-soft overflow-hidden hover:border-accent/30 hover:shadow-lg transition-all">
+      <button onClick={() => setOpen(true)} className="text-left w-full group rounded-2xl border border-line bg-card-soft overflow-hidden hover:border-accent/40 hover:shadow-lg transition-colors">
         {project.image && (
           <div className="relative h-[156px] w-full overflow-hidden bg-bg-soft">
             <Image src={project.image} alt={project.title} fill className="object-cover group-hover:scale-[1.03] transition-transform duration-500" sizes="400px" />
@@ -31,8 +31,8 @@ export function ProjectCard({ project }: { project: Project }) {
           </div>
         )}
         <div className="p-4">
-          <h3 className="font-semibold text-[15px] leading-tight">{project.title}</h3>
-          {project.description && <p className="mt-1.5 text-[13.5px] leading-relaxed text-[var(--muted-2)] line-clamp-2">{project.description}</p>}
+          <h3 className="t-title">{project.title}</h3>
+          {project.description && <p className="t-desc mt-1.5 line-clamp-2">{project.description}</p>}
           <div className="mt-3 flex flex-wrap gap-1.5">
             {project.tags.map((t) => (
               <span key={t} className="font-mono text-[11px] tracking-wide px-2 py-1 rounded-full bg-card border border-line text-muted">{t}</span>
@@ -54,13 +54,13 @@ export function ProjectCard({ project }: { project: Project }) {
               )}
               <div className="p-6">
                 <div className="flex justify-between gap-4">
-                  <h3 className="display text-2xl">{project.title}</h3>
-                  <button onClick={() => setOpen(false)} className="h-8 w-8 rounded-full border border-line grid place-items-center hover:bg-bg-soft">✕</button>
+                  <h3 className="card-h">{project.title}</h3>
+                  <button onClick={() => setOpen(false)} aria-label="Close" className="h-8 w-8 shrink-0 rounded-full border border-line grid place-items-center hover:bg-bg-soft hover:border-accent/40 hover:text-accent transition-colors">✕</button>
                 </div>
-                {project.description && <p className="mt-3 text-[14.5px] leading-relaxed text-[var(--muted-2)] whitespace-pre-wrap">{project.description}</p>}
+                {project.description && <p className="t-desc mt-3 whitespace-pre-wrap">{project.description}</p>}
                 <div className="mt-4 flex flex-wrap gap-1.5">
                   {project.tags.map((t) => (
-                    <span key={t} className="font-mono text-[11px] px-2.5 py-1 rounded-full bg-ink text-bg">
+                    <span key={t} className="font-mono text-[11px] tracking-wide px-2 py-1 rounded-full bg-card-soft border border-line text-muted">
                       {t}
                     </span>
                   ))}

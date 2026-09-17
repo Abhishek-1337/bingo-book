@@ -189,7 +189,7 @@ export function SkillManager({ skills }: { skills: Skill[] }) {
                   <button
                     type="button"
                     onClick={() => setCustomName(!customName)}
-                    className="text-xs text-text-secondary mt-1 hover:text-text-primary"
+                    className="text-xs text-text-secondary mt-1 hover:text-foreground transition-colors"
                   >
                     {customName ? "Choose from list" : "Type custom skill"}
                   </button>

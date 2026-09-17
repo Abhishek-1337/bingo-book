@@ -8,7 +8,7 @@ export function Projects({ items }: { items: Project[] }) {
     <div className="iso-card p-6 md:p-7">
       <div className="flex items-center justify-between mb-5">
         <span className="iso-tab"><b>03</b> Projects</span>
-        <span className="font-mono text-[11px] px-2.5 py-1 rounded-full bg-ink text-bg">{items.length} works</span>
+        <span className="section-label">{items.length} works</span>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         {items.map((p) => <ProjectCard key={p.id} project={p} />)}

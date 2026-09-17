@@ -26,7 +26,7 @@ export default function LoginPage() {
         </h1>
 
         {state?.error && (
-          <div className="mb-4 rounded-lg bg-red-50 p-4 text-red-700 text-sm">
+          <div className="alert-err mb-4">
             {state.error}
           </div>
         )}

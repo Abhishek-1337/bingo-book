@@ -40,7 +40,7 @@ export function Skills({ items }: { items: Skill[] }) {
         ))}
       </div>
 
-      <div className="mt-5 flex gap-1.5 font-mono text-[11px] text-muted/70">
+      <div className="mt-5 flex gap-1.5 font-mono text-[11px] text-muted">
         <span className="opacity-100">Expert</span>
         <span>·</span>
         <span className="opacity-60">Beginner</span>

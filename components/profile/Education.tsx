@@ -19,9 +19,9 @@ export function Education({ items }: { items: Edu[] }) {
               {e.logo ? <Image src={e.logo} alt={e.school} width={40} height={40} className="object-contain p-1" /> : <span className="text-sm font-bold text-muted">{e.school[0]}</span>}
             </div>
             <div>
-              <h3 className="text-[14.5px] font-semibold leading-tight">{e.school}</h3>
-              <p className="text-[13.5px] text-[var(--muted-2)]">{e.degree}{e.field ? ` · ${e.field}` : ""}</p>
-              <p className="font-mono text-xs text-muted mt-1">{fmt(e.startDate)} — {e.endDate ? fmt(e.endDate) : "Present"}</p>
+              <h3 className="t-title">{e.school}</h3>
+              <p className="t-sub mt-0.5">{e.degree}{e.field ? ` · ${e.field}` : ""}</p>
+              <p className="t-meta mt-1">{fmt(e.startDate)} — {e.endDate ? fmt(e.endDate) : "Present"}</p>
             </div>
           </div>
         ))}

@@ -76,7 +76,7 @@ export function AchievementManager({ achievements }: { achievements: Achievement
                 {iconOptions.map((icon) => (
                   <label key={icon} className="cursor-pointer">
                     <input type="radio" name="icon" value={icon} className="hidden" defaultChecked={editingAchievement?.icon === icon} />
-                    <span className="inline-block text-2xl p-2 rounded-lg border border-card-border hover:border-accent transition-colors has-[:checked]:bg-accent has-[:checked]:text-white">
+                    <span className="inline-block text-2xl p-2 rounded-lg border border-card-border hover:border-accent transition-colors has-[:checked]:bg-ink has-[:checked]:text-bg has-[:checked]:border-ink">
                       {icon}
                     </span>
                   </label>

@@ -28,8 +28,8 @@ export function AdminNav() {
             href={item.href}
             className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
               pathname === item.href
-                ? "bg-accent text-white"
-                : "text-foreground hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-200"
+                ? "bg-ink text-bg"
+                : "text-muted hover:bg-card-soft hover:text-ink"
             }`}
           >
             {item.label}
@@ -41,14 +41,14 @@ export function AdminNav() {
         <a
           href="/"
           target="_blank"
-          className="block rounded-lg px-3 py-2 text-sm font-medium text-foreground hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-200"
+          className="block rounded-lg px-3 py-2 text-sm font-medium text-muted hover:bg-card-soft hover:text-ink transition-colors"
         >
           View Portfolio
         </a>
         <form action={logoutAction}>
           <button
             type="submit"
-            className="block w-full text-left rounded-lg px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
+            className="block w-full text-left rounded-lg px-3 py-2 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-500/10 transition-colors"
           >
             Logout
           </button>

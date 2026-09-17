@@ -20,7 +20,7 @@ export default async function AdminDashboard() {
       <h2 className="section-title">Dashboard</h2>
 
       {!profile && (
-        <div className="mb-6 rounded-lg bg-yellow-50 p-4 text-yellow-700 text-sm">
+        <div className="alert-note mb-6">
           Your profile is not set up yet. Go to{" "}
           <a href="/admin/profile" className="font-medium underline">
             Profile
