@@ -1,10 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
 import { About } from "@/components/profile/About";
-import { Experience } from "@/components/profile/Experience";
 import { Education } from "@/components/profile/Education";
 import { Projects } from "@/components/profile/Projects";
-import { Skills } from "@/components/profile/Skills";
 import { Certifications } from "@/components/profile/Certifications";
 import { Achievements } from "@/components/profile/Achievements";
 import { ContactForm } from "@/components/profile/ContactForm";
@@ -13,12 +11,10 @@ export const dynamic = "force-dynamic";
 
 // home — isolated bento layout
 export default async function Home() {
-  const [profile, experiences, education, projects, skills, certifications, achievements] = await Promise.all([
+  const [profile, education, projects, certifications, achievements] = await Promise.all([
     prisma.profile.findFirst(),
-    prisma.experience.findMany({ orderBy: { order: "asc" } }),
     prisma.education.findMany({ orderBy: { order: "asc" } }),
     prisma.project.findMany({ orderBy: { order: "asc" } }),
-    prisma.skill.findMany({ orderBy: { order: "asc" } }),
     prisma.certification.findMany({ orderBy: { date: "desc" } }),
     prisma.achievement.findMany({ orderBy: { order: "asc" } }),
   ]);
@@ -45,14 +41,12 @@ export default async function Home() {
         {/* left stack */}
         <div className="space-y-6">
           <div id="about"><About bio={profile.bio} /></div>
-          <div id="experience"><Experience items={experiences} /></div>
           <div id="projects"><Projects items={projects} /></div>
           <Achievements items={achievements} />
         </div>
 
         {/* right rail — isolated sticky */}
         <div className="space-y-6 lg:sticky lg:top-[72px]">
-          <div id="skills"><Skills items={skills} /></div>
           <Education items={education} />
           <Certifications items={certifications} />
           <div id="contact"><ContactForm /></div>

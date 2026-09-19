@@ -21,16 +21,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* nav */}
         <nav className="nav-blur sticky top-0 z-40">
           <div className="mx-auto max-w-[1160px] px-6 h-[56px] flex items-center justify-between">
-            <a href="#" className="flex items-center gap-3">
+            <a href="/" className="flex items-center gap-3">
               <span className="h-7 w-7 rounded-full bg-ink text-bg grid place-items-center font-mono text-[11px] font-bold">AV</span>
               <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-muted">Archive — 2026</span>
             </a>
             <div className="hidden md:flex items-center gap-1 font-mono text-xs">
               {[
-                ["About", "#about"],
-                ["Work", "#experience"],
-                ["Projects", "#projects"],
-                ["Contact", "#contact"],
+                ["Work", "/experience"],
+                ["Skills", "/skills"],
               ].map(([l, h]) => (
                 <a key={h} href={h} className="px-3 py-1.5 rounded-full hover:bg-card border border-transparent hover:border-line transition-colors text-muted hover:text-ink">
                   {l}

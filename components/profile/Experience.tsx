@@ -7,6 +7,26 @@ type Experience = {
 
 function fmt(d: Date) { return new Date(d).toLocaleDateString("en-US", { month: "short", year: "numeric" }); }
 
+// bullet lines ("•", "*", "-") render as a list so long descriptions breathe
+function Description({ text }: { text: string }) {
+  const lines = text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+  if (!lines.length) return null;
+  const bullets = lines.filter((l) => /^[•*\-]\s+/.test(l));
+  if (bullets.length >= 2) {
+    return (
+      <ul className="mt-2.5 space-y-1.5">
+        {bullets.map((l, i) => (
+          <li key={i} className="t-desc flex gap-2">
+            <span aria-hidden="true" className="mt-[7px] h-1 w-1 rounded-full bg-accent shrink-0" />
+            <span>{l.replace(/^[•*\-]\s+/, "")}</span>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+  return <p className="t-desc mt-2 whitespace-pre-wrap">{text}</p>;
+}
+
 // experience — timeline isolated
 export function Experience({ items }: { items: Experience[] }) {
   if (!items.length) return null;
@@ -29,7 +49,7 @@ export function Experience({ items }: { items: Experience[] }) {
                 <h3 className="t-title">{e.role}</h3>
                 <p className="t-sub font-medium mt-0.5">{e.company}</p>
                 <p className="t-meta mt-1">{fmt(e.startDate)} — {e.current ? "Present" : e.endDate ? fmt(e.endDate) : ""} {e.current && "· Now"}</p>
-                {e.description && <p className="t-desc mt-2 whitespace-pre-wrap">{e.description}</p>}
+                {e.description && <Description text={e.description} />}
               </div>
             </div>
           </div>

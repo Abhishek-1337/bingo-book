@@ -79,9 +79,9 @@ export function ProfileHeader({ profile }: { profile: Profile }) {
         <div className="mt-6 flex flex-wrap gap-1.5 border-t border-line pt-4">
           {[
             ["01", "About", "#about"],
-            ["02", "Experience", "#experience"],
+            ["02", "Experience", "/experience"],
             ["03", "Projects", "#projects"],
-            ["04", "Skills", "#skills"],
+            ["04", "Skills", "/skills"],
             ["05", "Contact", "#contact"],
           ].map(([n, l, h]) => (
             <a key={h} href={h} className="group flex items-center gap-2 rounded-full border border-line bg-bg-soft px-3 py-1.5 font-mono text-xs hover:border-accent/40 transition-colors">
