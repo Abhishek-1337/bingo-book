@@ -2,10 +2,11 @@
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { sendMessage } from "@/lib/actions";
+import { Send } from "lucide-react";
 
 function Submit() {
   const { pending } = useFormStatus();
-  return <button disabled={pending} className="btn-a w-full">{pending ? "Sending…" : "Send message →"}</button>;
+  return <button disabled={pending} className="btn-a w-full inline-flex items-center justify-center gap-2">{pending ? "Sending…" : <>Send message<Send size={14} aria-hidden="true" /></>}</button>;
 }
 
 // contact — isolated form

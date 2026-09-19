@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               ))}
             </div>
             <div className="flex items-center gap-2">
-              <span className="hidden sm:inline font-mono text-[11px] tracking-wide uppercase text-muted">● Available for work</span>
+              <span className="hidden sm:inline-flex items-center gap-1.5 font-mono text-[11px] tracking-wide uppercase text-muted"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />Available for work</span>
             </div>
           </div>
         </nav>

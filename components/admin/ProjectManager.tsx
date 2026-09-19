@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { useFormStatus } from "react-dom";
 import { createProject, updateProject, deleteProject } from "@/lib/actions";
 import { ImageUpload } from "./ImageUpload";
+import { X } from "lucide-react";
 
 type Project = {
   id: string;
@@ -73,7 +74,7 @@ export function ProjectManager({ projects }: { projects: Project[] }) {
             className="grid h-8 w-8 place-items-center rounded-full border border-line text-muted hover:bg-bg-soft hover:text-ink transition-colors"
             aria-label="Close"
           >
-            ✕
+            <X size={16} aria-hidden="true" />
           </button>
         </div>
 

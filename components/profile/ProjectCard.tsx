@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
+import { ArrowUpRight, X } from "lucide-react";
 
 type Project = { id: string; title: string; description?: string | null; image?: string | null; url?: string | null; githubUrl?: string | null; tags: string[] };
 
@@ -30,7 +31,7 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.image && imgOk && (
             <Image src={project.image} alt={project.title} fill onError={() => setImgOk(false)} className="object-cover group-hover:scale-[1.03] transition-transform duration-500" sizes="400px" />
           )}
-          <div className="absolute top-3 left-3 font-mono text-[11px] tracking-wide uppercase bg-card/90 backdrop-blur px-2 py-1 rounded-full border border-line">View ↗</div>
+          <div className="absolute top-3 left-3 font-mono text-[11px] tracking-wide uppercase bg-card/90 backdrop-blur px-2 py-1 rounded-full border border-line inline-flex items-center gap-0.5">View<ArrowUpRight size={12} aria-hidden="true" /></div>
         </div>
         <div className="flex flex-1 flex-col p-4">
           <h3 className="t-title">{project.title}</h3>
@@ -58,7 +59,7 @@ export function ProjectCard({ project }: { project: Project }) {
               <div className="p-6">
                 <div className="flex justify-between gap-4">
                   <h3 className="card-h">{project.title}</h3>
-                  <button onClick={() => setOpen(false)} aria-label="Close" className="h-8 w-8 shrink-0 rounded-full border border-line grid place-items-center hover:bg-bg-soft hover:border-accent/40 hover:text-accent transition-colors">✕</button>
+                  <button onClick={() => setOpen(false)} aria-label="Close" className="h-8 w-8 shrink-0 rounded-full border border-line grid place-items-center hover:bg-bg-soft hover:border-accent/40 hover:text-accent transition-colors"><X size={14} aria-hidden="true" /></button>
                 </div>
                 {project.description && <p className="t-desc mt-3 whitespace-pre-wrap">{project.description}</p>}
                 <div className="mt-4 flex flex-wrap gap-1.5">
@@ -70,8 +71,8 @@ export function ProjectCard({ project }: { project: Project }) {
                 </div>
                 <div className="mt-5 flex gap-2">
                   {project.url && (
-                    <a href={project.url} target="_blank" className="btn-a text-xs">
-                      Live Demo ↗
+                    <a href={project.url} target="_blank" className="btn-a text-xs inline-flex items-center gap-1">
+                      Live Demo<ArrowUpRight size={13} aria-hidden="true" />
                     </a>
                   )}
                   {project.githubUrl && (

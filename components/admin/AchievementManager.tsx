@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import { createAchievement, updateAchievement, deleteAchievement } from "@/lib/actions";
+import { AchievementIcon, achievementIconOptions } from "@/components/achievement-icons";
 
 type Achievement = {
   id: string;
@@ -26,8 +27,6 @@ function FormButton() {
 function formatDate(date: Date) {
   return new Date(date).toISOString().split("T")[0];
 }
-
-const iconOptions = ["🏆", "🎖️", "🏅", "🥇", "🎯", "⭐", "🚀", "💡", "🔥", "✨"];
 
 export function AchievementManager({ achievements }: { achievements: Achievement[] }) {
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -73,11 +72,11 @@ export function AchievementManager({ achievements }: { achievements: Achievement
             <div>
               <label className="label">Icon</label>
               <div className="flex gap-2 flex-wrap">
-                {iconOptions.map((icon) => (
-                  <label key={icon} className="cursor-pointer">
-                    <input type="radio" name="icon" value={icon} className="hidden" defaultChecked={editingAchievement?.icon === icon} />
-                    <span className="inline-block text-2xl p-2 rounded-lg border border-card-border hover:border-accent transition-colors has-[:checked]:bg-ink has-[:checked]:text-bg has-[:checked]:border-ink">
-                      {icon}
+                {achievementIconOptions.map(({ value, label, Icon }) => (
+                  <label key={value} title={label} className="cursor-pointer">
+                    <input type="radio" name="icon" value={value} className="hidden" defaultChecked={editingAchievement?.icon === value} />
+                    <span className="inline-block p-2 rounded-lg border border-card-border hover:border-accent transition-colors has-[:checked]:bg-ink has-[:checked]:text-bg has-[:checked]:border-ink">
+                      <Icon size={22} aria-hidden="true" />
                     </span>
                   </label>
                 ))}
@@ -104,7 +103,7 @@ export function AchievementManager({ achievements }: { achievements: Achievement
         {achievements.map((achievement) => (
           <div key={achievement.id} className="flex items-center justify-between rounded-lg border border-card-border p-4">
             <div className="flex items-center gap-3">
-              <span className="text-2xl">{achievement.icon || "🏆"}</span>
+              <AchievementIcon name={achievement.icon} className="h-6 w-6 shrink-0" />
               <div>
                 <p className="font-semibold">{achievement.title}</p>
                 <p className="text-sm text-text-secondary">

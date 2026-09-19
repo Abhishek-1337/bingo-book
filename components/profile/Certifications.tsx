@@ -1,3 +1,5 @@
+import { ArrowUpRight } from "lucide-react";
+
 type Cert = { id: string; name: string; issuer: string; date: Date; url?: string | null };
 function fmt(d: Date) { return new Date(d).toLocaleDateString("en-US", { month: "short", year: "numeric" }); }
 
@@ -16,7 +18,7 @@ export function Certifications({ items }: { items: Cert[] }) {
             <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
             <div className="flex-1 min-w-0">
               <div className="t-title">
-                {c.url ? <a href={c.url} target="_blank" className="link-accent">{c.name} ↗</a> : c.name}
+                {c.url ? <a href={c.url} target="_blank" className="link-accent inline-flex items-center gap-0.5">{c.name}<ArrowUpRight size={13} aria-hidden="true" /></a> : c.name}
               </div>
               <div className="t-meta mt-1">{c.issuer} · {fmt(c.date)}</div>
             </div>

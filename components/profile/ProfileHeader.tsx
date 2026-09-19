@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { AtSign, BriefcaseBusiness, CodeXml, Globe, Mail, type LucideIcon } from "lucide-react";
 
 type Profile = {
   name: string;
@@ -56,19 +57,20 @@ export function ProfileHeader({ profile }: { profile: Profile }) {
               Building quietly — interfaces, systems, and small tools that feel good to use.
             </p>
             <div className="mt-3 flex md:justify-end flex-wrap gap-1.5">
-              {[
-                profile.email && ["Email", `https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`],
-                profile.website && ["Website", profile.website],
-                profile.github && ["GitHub", profile.github],
-                profile.linkedin && ["LinkedIn", profile.linkedin],
-                profile.twitter && ["Twitter", profile.twitter],
-              ]
-                .filter(Boolean)
-                .map((e: any) => (
-                  <a key={e[0]} href={e[1]} target="_blank" rel="noopener noreferrer" className="pill-link">
-                    {e[0]}
-                  </a>
-                ))}
+              {(
+                [
+                  profile.email && { label: "Email", href: `https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`, Icon: Mail },
+                  profile.website && { label: "Website", href: profile.website, Icon: Globe },
+                  profile.github && { label: "GitHub", href: profile.github, Icon: CodeXml },
+                  profile.linkedin && { label: "LinkedIn", href: profile.linkedin, Icon: BriefcaseBusiness },
+                  profile.twitter && { label: "Twitter", href: profile.twitter, Icon: AtSign },
+                ].filter(Boolean) as { label: string; href: string; Icon: LucideIcon }[]
+              ).map(({ label, href, Icon }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="pill-link inline-flex items-center gap-1.5">
+                  <Icon size={13} aria-hidden="true" />
+                  {label}
+                </a>
+              ))}
             </div>
           </div>
         </div>

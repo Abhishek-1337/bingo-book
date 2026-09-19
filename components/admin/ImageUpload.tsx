@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
+import { X } from "lucide-react";
 
 type ImageUploadProps = {
   name: string;
@@ -89,8 +90,9 @@ export function ImageUpload({
             type="button"
             onClick={handleRemove}
             className="absolute top-1 right-1 flex h-6 w-6 items-center justify-center rounded-full bg-black/60 text-xs text-white hover:bg-black/80"
+            aria-label="Remove image"
           >
-            ✕
+            <X size={12} aria-hidden="true" />
           </button>
         </div>
       )}

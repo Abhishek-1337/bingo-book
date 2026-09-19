@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { Moon, Sun } from "lucide-react";
 
 // theme — isolated toggle
 export function ThemeToggle() {
@@ -18,7 +19,7 @@ export function ThemeToggle() {
   };
   return (
     <button onClick={toggle} aria-label="Toggle theme" className="fixed bottom-6 right-6 z-50 h-11 w-11 rounded-full bg-card border border-line shadow-lg grid place-items-center hover:scale-105 hover:border-accent/40 transition-all">
-      {dark ? "☀" : "☾"}
+      {dark ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
     </button>
   );
 }
