@@ -25,7 +25,7 @@ export function ProjectCard({ project }: { project: Project }) {
   }, [open]);
   return (
     <>
-      <button onClick={() => setOpen(true)} className="text-left w-full h-full flex flex-col group rounded-2xl border border-line bg-card-soft overflow-hidden hover:border-accent/40 hover:shadow-lg transition-colors">
+      <button onClick={() => setOpen(true)} className="project-tile text-left w-full h-full flex flex-col group rounded-2xl border border-line bg-card-soft overflow-hidden hover:border-accent/40">
         <div className="relative h-[156px] w-full shrink-0 overflow-hidden bg-bg-soft grid place-items-center">
           <span aria-hidden="true" className="display text-[40px] leading-none text-muted/30 select-none">{project.title.charAt(0)}</span>
           {project.image && imgOk && (
